@@ -1,0 +1,1 @@
+# SZE-Projektmunka2-2020-GSP-Art
