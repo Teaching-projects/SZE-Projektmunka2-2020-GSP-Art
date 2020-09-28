@@ -13,8 +13,7 @@ A felhasználó belépést követően rajzol egy törött vonalból álló rajzo
 
 ### Funcionális követelmények
 
--	Legyen könnyen átlátható
--	A kód legyen verzió kezelve
+
 -	Biztonsági rések ne legyenek
 -	Csak az a felhasználó tudjon bejelentkezni, aki már regisztrált és a megfelelő adatokat adja meg
 -	A rajzolófelületen csak egyenes vonalakból álló poligon alakzatot rajzolhasson a felhasználó
@@ -27,6 +26,8 @@ A felhasználó belépést követően rajzol egy törött vonalból álló rajzo
 
 ### Nem funkcionális követelmények
 
+-	Legyen könnyen átlátható
+-	A kód legyen verzió kezelve
 -	Legnépszerűbb alkalmazásokhoz való csatlakoztatás lehetőségeinek feltárása, és amennyiben lehetőség van rá, egyikhez való csatlakoztatás
 -	API-n keresztül lekérni a felhasználó adott futását
 Amennyiben API nem áll rendelkezésre:
