@@ -14,25 +14,22 @@ A felhasználó belépést követően rajzol egy törött vonalból álló rajzo
 ### Funcionális követelmények
 
 
--	Biztonsági rések ne legyenek
+
 -	Csak az a felhasználó tudjon bejelentkezni, aki már regisztrált és a megfelelő adatokat adja meg
 -	A rajzolófelületen csak egyenes vonalakból álló poligon alakzatot rajzolhasson a felhasználó
--	Felhasználó tudjon feltölteni .gpx kiterjesztésű fájlokat
+-	Legnépszerűbb alkalmazásokhoz való csatlakoztatás lehetőségeinek feltárása, és amennyiben lehetőség van rá, egyikhez való csatlakoztatás. Ha nem, akkor GPX feltöltés.
 -	A program legyen képes a felhasználó által készített rajz és az adott gpx fájl közötti hasonlóságot számszerűen megadni
--	A hasonlóságok alapján állítson fel rangsort a feltöltött gpx fájlokból
+-	A hasonlóságok alapján állítson fel rangsort a feltöltött gpx fájlokból / fitnesz adatbázisból átemelt futásokból.
 -	A program a rajz alapján legyen képes győri útvonalat javasolni
 
 ---
 
 ### Nem funkcionális követelmények
 
--	Legyen könnyen átlátható
+-	Biztonsági rések ne legyenek
+-	Legyen könnyen átlátható, megfelelően struktúrált
 -	A kód legyen verzió kezelve
--	Legnépszerűbb alkalmazásokhoz való csatlakoztatás lehetőségeinek feltárása, és amennyiben lehetőség van rá, egyikhez való csatlakoztatás
--	API-n keresztül lekérni a felhasználó adott futását
-Amennyiben API nem áll rendelkezésre:
--	GPX fájl tartalmazzon egy útvonalat, mely összehasonlítható a rajzolt ábrával 
--	A felhasználó csak GPX fájlokat töltsön fel
+
 
 ---
 
