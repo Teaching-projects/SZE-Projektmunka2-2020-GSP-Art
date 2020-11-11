@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: sebastianpopp/ftp-action@releases/v2
-    with:
-      host: ${{ secrets.FTP_SERVER }}
-      user: ${{ secrets.FTP_USER }}
-      password: ${{ secrets.FTP_PASS }}
-      localDir: "loginpage"
+    - name: FTP_Upload
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        localDir: "loginpage"
