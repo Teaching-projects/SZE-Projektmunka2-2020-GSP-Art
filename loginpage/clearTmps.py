@@ -1,10 +1,9 @@
-#!/usr/local/lib python3
 import mysql.connector
 import os
 import sys
 
 
-def clearEveryThing():
+def clearEveryThing(username):
     paths = [
         "images/edit/tmp",
         "images/filled/tmp",
@@ -14,21 +13,21 @@ def clearEveryThing():
     ]
     for path in paths:
         for file in os.listdir(path):
-            os.unlink(os.path.join(path, file))
+            if username in file:
+                mydb = mysql.connector.connect(
+                    host="localhost",
+                    user="projekt",
+                    password="123Projekt123",
+                    database="projekt2"
+                )
 
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="projekt",
-        password="123Projekt123",
-        database="projekt2"
-    )
+                cursor = mydb.cursor()
 
-    cursor = mydb.cursor()
+                sql = "DELETE FROM tmp_gpx WHERE name LIKE '%" + username + "%'"
 
-    sql = "TRUNCATE TABLE tmp_gpx"
-
-    cursor.execute(sql)
-    mydb.commit()
+                cursor.execute(sql)
+                mydb.commit()
+                os.unlink(path + "/" + file)
 
 
 def moveNeededFiles(filename):
@@ -39,17 +38,24 @@ def moveNeededFiles(filename):
         "images/routes/tmp",
     ]
     for path in paths:
-        os.rename(path + "/" + filename + ".png", path[:-3] + "/" + filename + ".png")
+        os.rename(path + "/" + filename + ".png", path[:-3] + filename + ".png")
 
     os.rename("gpx/tmp/" + filename + ".gpx", "gpx/" + filename + ".gpx")
 
 
 def main():
-    filename = sys.argv[1]
+    filename = ""
+    if (len(sys.argv) == 2):
+        filename = sys.argv[1]
 
-    moveNeededFiles(filename)
+        username = filename.split('-')[0]
 
-    clearEveryThing()
+        moveNeededFiles(filename)
+
+        clearEveryThing(username)
+    elif (len(sys.argv) == 3):
+        clearEveryThing(sys.argv[1])
+
 
 
 if __name__ == "__main__":

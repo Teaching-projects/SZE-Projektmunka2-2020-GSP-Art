@@ -35,15 +35,19 @@ $("#poly").click(function () {
     }
 });
 
-$("#upload").click(function () {
-    //var file = document.getElementsByName("gpxFile");
+$("#fileupload").change(function () {
     var file = $("input[name='gpxFile[]']")[0];
+    if (file.files.length == 1) {
+        $('#fileuploadtext').text(file.files.item(0).name);
+    } else if(file.files.length > 1) {
+        $('#fileuploadtext').text(file.files.length + ' file selected');
+    }
+})
+
+
+$("#fromStrava").click(function () {
     if (isCanvasBlank(canvas)) {
-        alert("First you need to draw a polygon!");
-    } else if (file.files.length == 0) {
-        alert("First you need to select a file to upload!");
-    } else if (!file.files.item(0).name.endsWith(".gpx")) {
-        alert("You need to choose .gpx file");
+        alert("Eloszor rajzolnod kell valamit!")
     } else {
         var dataURLorig = canvas.toDataURL();
 
@@ -60,10 +64,52 @@ $("#upload").click(function () {
         poly.set("strokeWidth", 3);
         canvas.backgroundColor = "white";
 
-        $("#imgOrig").val(dataURLorig);
-        $("#imgEdit").val(dataURLedited);
+        $("#imgOrigstrava").val(dataURLorig);
+        $("#imgEditstrava").val(dataURLedited);
 
-        $("#form").submit();
+        $("#strava").submit();
+    }
+
+})
+
+
+$("#upload").click(function () {
+    //var file = document.getElementsByName("gpxFile");
+    var file = $("input[name='gpxFile[]']")[0];
+    if (isCanvasBlank(canvas)) {
+        alert("Eloszor rajzolnod kell valamit!");
+    } else if (file.files.length == 0) {
+        alert("Valassz fajlt a feltolteshez!");
+    } else {
+        var filesGood = true;
+        for(var i = 0; i < file.files.length; i++) {
+            if (!file.files.item(i).name.endsWith(".gpx")){
+                filesGood = false;
+                alert("You can upload gpx file only!");
+            }
+        }
+
+        if (filesGood) {
+            var dataURLorig = canvas.toDataURL();
+
+            var poly = canvas.getObjects()[0];
+            poly.set("fill", "white");
+            poly.set("stroke", "white");
+            poly.set("strokeWidth", 4);
+            canvas.backgroundColor = "black";
+
+            var dataURLedited = canvas.toDataURL();
+
+            poly.set("fill", "white");
+            poly.set("stroke", "blue");
+            poly.set("strokeWidth", 3);
+            canvas.backgroundColor = "white";
+
+            $("#imgOrig").val(dataURLorig);
+            $("#imgEdit").val(dataURLedited);
+
+            $("#form").submit();
+        }
     }
 });
 

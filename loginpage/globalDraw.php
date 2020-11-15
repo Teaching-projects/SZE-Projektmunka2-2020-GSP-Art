@@ -15,7 +15,7 @@ require_once "config.php";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profil</title>
+    <title>Toplista</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@ require_once "config.php";
 
 <?php
 
-$sql = "SELECT * FROM images WHERE user_id= " . $_SESSION['id'] . " ORDER BY score DESC";
+$sql = "SELECT images.name AS 'name', SUM(images.score) AS score, users.username AS username FROM images INNER JOIN users ON users.id = images.user_id ORDER BY score DESC GROUP BY users.username";
 
 $result = mysqli_query($link, $sql);
 
@@ -49,14 +49,15 @@ if ($result->num_rows === 0) {
     echo "<h3>Meg nem rajzoltal semmit :(</h3>";
     exit;
 } else {
-    echo "<table class='table'>";
+    echo "<div class='w-50 mx-auto'>";
+    echo "<table class='table table-striped'>";
     echo "<thead>";
     echo "<tr>";
     echo "<th class='text-center' scope='col'>#</th>";
+    echo "<th class='text-center' scope='col>Username</th>";
     echo "<th class='text-center' scope='col'>Image</th>";
     echo "<th class='text-center' scope='col'>GPX</th>";
     echo "<th class='text-center' scope='col'>Score</th>";
-    echo "<th class='text-center' scope='col'>Delete</th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
@@ -66,16 +67,16 @@ if ($result->num_rows === 0) {
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         echo "<tr>";
         echo "<th class='text-center' scope='row' style='font-size: 40px; padding-top: 52px'>" . $id++ . "</th>";
-        echo "<td class='text-center'><img src='images/orig/" . $row['name'] . ".png" . "' width='150'></td>";
-
-        echo "<td class='text-center'><img src='images/routes/" . $row['name'] . ".png" . "' width='150'></td>";
+        echo "<th class='text-center' scope='row' style='font-size: 40px; padding-top: 52px'>" . $row['username'] . "</th>";
+        //echo "<td class='text-center'><img src='images/orig/" . $row['name'] . ".png" . "' width='150'></td>";
+        //echo "<td class='text-center'><img src='images/routes/" . $row['name'] . ".png" . "' width='150'></td>";
         echo "<td class='text-center' style='font-size: 40px; padding-top: 52px'>" . $row['score'] . "</td>";
-        echo "<td class='text-center'><form method='post'><input class='btn btn-danger' type='submit' id='" . $row['name'] . "' name='deleteBTN' value='Törlés' onclick='deleteSelected(this.id)' style='margin-top: 61px'></form></td>";
         echo "</tr>";
     }
 
     echo "</tbody>";
     echo "</table>";
+    echo "</div>";
 }
 ?>
 

@@ -7,8 +7,7 @@ require_once 'config.php';
 
 define('ORIGINAL', 'images/orig/');
 define('EDITED', 'images/edit/');
-define('GPX', 'gpx/');
-define('TMP', 'gpx/tmp');
+define('TMP', 'gpx/tmp/');
 
 $username = $_POST['userName'];
 $id = $_POST["id"];
@@ -33,14 +32,14 @@ if (count($_FILES['gpxFile']['name']) == 1) {
 
     $tmp_name = $_FILES["gpxFile"]["tmp_name"][0];
 
-    move_uploaded_file($tmp_name, GPX . "tmp/" . $file . ".gpx");
+    move_uploaded_file($tmp_name, TMP . $file . ".gpx");
 
     $sql = "INSERT INTO tmp_gpx (user_id, name) VALUES (?, ?)";
 
     if ($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_bind_param($stmt, "is", $id, $file);
         if (mysqli_stmt_execute($stmt)) {
-            echo shell_exec("python gpxToPng.py " . $file . " 2>&1");
+            echo shell_exec("python gpxToPng.py " . $username . " 2>&1");
 
             $sql = "SELECT score FROM tmp_gpx WHERE name = '" . $file . "'";
             $result = mysqli_query($link, $sql);
@@ -81,14 +80,14 @@ if (count($_FILES['gpxFile']['name']) == 1) {
 
         $tmp_name = $_FILES["gpxFile"]["tmp_name"][$i];
 
-        move_uploaded_file($tmp_name, GPX . "tmp/" . $file . ".gpx");
+        move_uploaded_file($tmp_name, TMP . $file . ".gpx");
 
         $sql = "INSERT INTO tmp_gpx (user_id, name) VALUES (?, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)){
             mysqli_stmt_bind_param($stmt, "is", $id, $file);
             if (mysqli_stmt_execute($stmt)) {
-                echo shell_exec("python gpxToPng.py " . $file . " 2>&1");
+                echo shell_exec("python gpxToPng.py " . $username . " 2>&1");
 
                 header("Location: /gpxSelector.php");
             } else {

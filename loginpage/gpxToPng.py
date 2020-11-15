@@ -1,13 +1,10 @@
-#!/usr/local/lib python3
-import math
-
 import gpxpy
 import gpxpy.gpx
 import matplotlib.pyplot as plt
-import sys
 import mysql.connector
 import cv2
 import os
+import sys
 
 
 def get_coordinates(filename):
@@ -78,37 +75,26 @@ def calculateScore(filename1, filename2):
     return 100 - (raw * 100)
 
 
-def main1():
+def main1(username):
     # get gpx/tmp tree because all gpx file need to png
     for file in os.listdir(f"./gpx/tmp"):
-        filename = file[:-4]
-        x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
-        save_filled("images/filled/tmp/"+filename+".png", x, y)
+        if username in file:
+            filename = file[:-4]
+            x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
+            save_filled("images/filled/tmp/"+filename+".png", x, y)
 
-        x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
-        save_route("images/routes/tmp/" + filename + ".png", x, y)
+            x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
+            save_route("images/routes/tmp/" + filename + ".png", x, y)
 
-    filenameOfDrawing = "images/edit/tmp/" + os.listdir(f"./images/edit/tmp")[0]
+    #filenameOfDrawing = "images/edit/tmp/" + os.listdir(f"./images/edit/tmp")[0]
 
     for file in os.listdir(f"./images/filled/tmp"):
-        score = calculateScore(filenameOfDrawing, "images/filled/tmp/" + file)
+        if username in file:
+            score = calculateScore('images/edit/tmp/' + file, "images/filled/tmp/" + file)
 
-        mysqlUpload(file[:-4], round(score,3))
-
-def main(argv):
-
-    filename = sys.argv[1]
-
-    x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
-    save_route(filename + ".gpx", x, y)  # -->proba1_route.png
-
-    x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
-    save_filled(filename + ".gpx", x, y)  # -->proba1.png
-
-    score = calculateScore("images/routes/tmp/" + filename + ".png", "images/filled/tmp/" + filename + ".png")
-
-    mysqlUpload(filename, round(score, 3))
+            mysqlUpload(file[:-4], round(score,3))
 
 
 if __name__ == "__main__":
-    main1()
+    if len(sys.argv) == 2:
+        main1(sys.argv[1])

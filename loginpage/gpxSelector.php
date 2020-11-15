@@ -10,12 +10,22 @@ session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
-}?>
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['Back'])) {
+        $userLocal = $_POST['userNameToPhp'];
+        echo shell_exec("python clearTmps.py " . $userLocal . " onlyUserName 2>&1");
+    }
+}
+?>
 
 <html>
 <head>
     <title>Select your gpx file to save</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -59,7 +69,6 @@ if (array_key_exists('selectBTN', $_POST)) {
         mysqli_stmt_bind_param($stmt, "isd", $userID, $filename, $score);
         if (mysqli_stmt_execute($stmt)) {
             echo shell_exec("python clearTmps.py " . $filename . " 2>&1");
-
             header("Location: /profileDraw.php");
         } else {
             echo '<script language="javascript">';
@@ -71,6 +80,12 @@ if (array_key_exists('selectBTN', $_POST)) {
     }
 }
 ?>
+
+<form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' name='backForm' id='backFrom'>
+    <input type='hidden' name='userNameToPhp' value='<?php echo htmlspecialchars($_SESSION['username']); ?>'>
+    <input type='submit' name='Back' id='Back' value='Mégse' class='btn btn-danger pull-right'>
+</form>
+
 </body>
 </html>
 
