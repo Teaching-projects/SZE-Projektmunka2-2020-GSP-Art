@@ -84,7 +84,7 @@ if (array_key_exists('selectBTN', $_POST)) {
 
 <form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' name='backForm' id='backFrom'>
     <input type='hidden' name='userNameToPhp' value='<?php echo htmlspecialchars($_SESSION['username']); ?>'>
-    <input type='submit' name='Back' id='Back' value='Mégse' class='btn btn-danger pull-right' style='float: right; margin-right: 200px;'>
+    <input type='submit' name='Back' id='Back' value='Mégse' class='btn btn-danger float-right mr-5'>
 </form>
 
 </body>

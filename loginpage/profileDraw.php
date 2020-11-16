@@ -77,6 +77,22 @@ if ($result->num_rows === 0) {
     echo "</tbody>";
     echo "</table>";
 }
+
+$filename = "";
+
+if (array_key_exists('deleteBTN', $_POST)) {
+    $filename = $_COOKIE['test'];
+    unlink("gpx/" . $filename . ".gpx");
+    unlink("images/edit/" . $filename . ".png");
+    unlink("images/orig/" . $filename . ".png");
+    unlink("images/filled/" . $filename . ".png");
+    unlink("images/routes/" . $filename . ".png");
+
+    mysqli_query($link, "DELETE FROM images WHERE name = '" . $filename . "'");
+
+    mysqli_close($link);
+    header("refresh:1;url=profileDraw.php");
+}
 ?>
 
 <script>
@@ -98,25 +114,5 @@ if ($result->num_rows === 0) {
         document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
     }
 </script>
-
-<?php
-$filename = "";
-
-if (array_key_exists('deleteBTN', $_POST)) {
-    $filename = $_COOKIE['test'];
-    unlink("gpx/" . $filename . ".gpx");
-    unlink("images/edit/" . $filename . ".png");
-    unlink("images/orig/" . $filename . ".png");
-    unlink("images/filled/" . $filename . ".png");
-    unlink("images/routes/" . $filename . ".png");
-
-    mysqli_query($link, "DELETE FROM images WHERE name = '" . $filename . "'");
-
-    mysqli_close($link);
-    header( "refresh:1;url=profileDraw.php" );
-}
-?>
-
-
 </body>
 </html>
