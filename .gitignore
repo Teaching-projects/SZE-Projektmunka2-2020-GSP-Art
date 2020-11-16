@@ -2,3 +2,5 @@
 .idea/
 gpx/
 images/
+loginpage/__pycache__
+.gitignore

@@ -41,7 +41,7 @@ require_once "config.php";
 
 <?php
 
-$sql = "SELECT images.name AS 'name', SUM(images.score) AS score, users.username AS username FROM images INNER JOIN users ON users.id = images.user_id ORDER BY score DESC GROUP BY users.username";
+$sql = "SELECT images.name AS 'name', ROUND(SUM(images.score), 3) AS score, users.username AS username FROM images INNER JOIN users ON users.id = images.user_id GROUP BY users.username ORDER BY score DESC;";
 
 $result = mysqli_query($link, $sql);
 
@@ -56,7 +56,6 @@ if ($result->num_rows === 0) {
     echo "<th class='text-center' scope='col'>#</th>";
     echo "<th class='text-center' scope='col>Username</th>";
     echo "<th class='text-center' scope='col'>Image</th>";
-    echo "<th class='text-center' scope='col'>GPX</th>";
     echo "<th class='text-center' scope='col'>Score</th>";
     echo "</tr>";
     echo "</thead>";
@@ -68,8 +67,6 @@ if ($result->num_rows === 0) {
         echo "<tr>";
         echo "<th class='text-center' scope='row' style='font-size: 40px; padding-top: 52px'>" . $id++ . "</th>";
         echo "<th class='text-center' scope='row' style='font-size: 40px; padding-top: 52px'>" . $row['username'] . "</th>";
-        //echo "<td class='text-center'><img src='images/orig/" . $row['name'] . ".png" . "' width='150'></td>";
-        //echo "<td class='text-center'><img src='images/routes/" . $row['name'] . ".png" . "' width='150'></td>";
         echo "<td class='text-center' style='font-size: 40px; padding-top: 52px'>" . $row['score'] . "</td>";
         echo "</tr>";
     }

@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['Back'])) {
         $userLocal = $_POST['userNameToPhp'];
         echo shell_exec("python clearTmps.py " . $userLocal . " onlyUserName 2>&1");
+        header("Location: draw.php");
     }
 }
 ?>
@@ -83,7 +84,7 @@ if (array_key_exists('selectBTN', $_POST)) {
 
 <form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' name='backForm' id='backFrom'>
     <input type='hidden' name='userNameToPhp' value='<?php echo htmlspecialchars($_SESSION['username']); ?>'>
-    <input type='submit' name='Back' id='Back' value='Mégse' class='btn btn-danger pull-right'>
+    <input type='submit' name='Back' id='Back' value='Mégse' class='btn btn-danger pull-right' style='float: right; margin-right: 200px;'>
 </form>
 
 </body>
