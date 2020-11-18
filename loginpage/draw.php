@@ -133,10 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         var lat = <?php echo json_encode($lat); ?>;
         var lon = <?php echo json_encode($long); ?>;
 
+        TESTER = document.getElementById("tester");
+
         if (lat.length !== 0){
             $("#tester").css("display", "block");
         }
-
 
         var data = [{
             type:'scattermapbox',

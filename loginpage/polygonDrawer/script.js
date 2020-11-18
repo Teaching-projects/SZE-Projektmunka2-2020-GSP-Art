@@ -21,6 +21,8 @@ $("#deleteObj").click(function () {
     canvas.renderAll();
 });
 
+
+
 $("#poly").click(function () {
     if (drawingObject.type === "roof") {
         drawingObject.type = "";
@@ -34,6 +36,22 @@ $("#poly").click(function () {
         drawingObject.type = "roof"; // roof type
     }
 });
+
+$("#getRoute").click(function () {
+    if (isCanvasBlank(canvas)) {
+        alert("Eloszor rajzolj valamit!");
+    } else {
+        var poly = canvas.getObjects()[0];
+        poly.set("fill", "white");
+        poly.set("stroke", "white");
+        poly.set("strokeWidth", 4);
+        canvas.backgroundColor = "black";
+
+        $("#imgEditToMap").val(canvas.toDataURL());
+
+        $("#mapForm").submit();
+    }
+})
 
 $("#fileupload").change(function () {
     var file = $("input[name='gpxFile[]']")[0];
