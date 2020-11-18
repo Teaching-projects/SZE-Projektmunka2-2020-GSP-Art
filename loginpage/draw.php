@@ -22,6 +22,33 @@ if ($row[0] == "unset"){
     $strava = "inline";
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['imgEditToMap'])) {
+        $img = $_POST['imgEditToMap'];
+        $username = $_POST['userName'];
+
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+
+        $data = base64_decode($img);
+        $file = $username . "-" . uniqid();
+        $success = file_put_contents("images/edit/tmp/" . $file . ".png", $data);
+
+        $result = shell_exec("python getRoute.py " . $file . ".png 2>&1");
+        $tomb = explode("//", $result);
+        $long = explode(",", substr($tomb[0], 1,-1));
+        $lat = explode(",", substr($tomb[1], 1,-1));
+        foreach($long as &$iter) {
+            $iter = doubleval($iter);
+        }
+        foreach($lat as &$iter) {
+            $iter = doubleval($iter);
+        }
+
+        unlink("images/edit/tmp/" . $file . ".png");
+    }
+}
+
 ?>
  
 <!DOCTYPE html>
@@ -34,6 +61,8 @@ if ($row[0] == "unset"){
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 
     <script src="polygonDrawer/fabric.js"></script>
@@ -48,7 +77,7 @@ if ($row[0] == "unset"){
 </head>
 <body>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. udvozollek az oldalamon.</h1>
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> udvozollek az oldalamon.</h1>
         <p>
         <a href="draw.php" class="btn btn-primary">Rajzolas</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
@@ -89,7 +118,59 @@ if ($row[0] == "unset"){
         <input id="imgEditstrava" name="imgEditstrava" type="hidden">
     </form>
 
+    <form id="mapForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
+        <input type="hidden" name="imgEditToMap" id="imgEditToMap">
+        <input type="hidden" name="userName" value="<?php echo htmlspecialchars($_SESSION['username'])?>">
+    </form>
+    <button name="getRoute" class="btn btn-primary" title="Show on map" id="getRoute">Get route</button>
+
+    <div id="tester" style="width: 800px;height: 600px; margin: auto; display: none;"></div>
+    <div style="width: 1px; height: 20px"></div>
+
     <script src="polygonDrawer/script.js"></script>
+
+    <script language="JavaScript">
+        var lat = <?php echo json_encode($lat); ?>;
+        var lon = <?php echo json_encode($long); ?>;
+
+        if (lat.length !== 0){
+            $("#tester").css("display", "block");
+        }
+
+
+        var data = [{
+            type:'scattermapbox',
+            lat: lat,
+            lon: lon,
+            mode: 'lines',
+            marker : {
+                size:10
+            },
+            line: {
+                width:4.5,
+                color:'blue'
+            },
+        }]
+        var layout = {
+            autosize: true,
+            mapbox: {
+                style: 'open-street-map',
+                zoom:14,
+                center: {
+                    lat: 47.688,
+                    lon: 17.630
+                },
+            },
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0,
+                pad: 50
+            }
+        }
+        Plotly.newPlot( TESTER, data, layout);
+    </script>
 </body>
 </html>
 

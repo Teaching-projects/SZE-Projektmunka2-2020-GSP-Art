@@ -30,7 +30,7 @@ CREATE TABLE `images` (
   `user_id` int NOT NULL,
   `score` double DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (8,'tsbalazs-5fa907478e534',5,96.575),(9,'tsbalazs-5fa907639dad6',5,30.431),(17,'gaborka98-5faaf1e450f43',4,97.653),(23,'gaborka98-5fb24a4316af5',4,85.799),(24,'gaborka98-5fb24b3809aea',4,72.791);
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +56,7 @@ CREATE TABLE `tmp_gpx` (
   `user_id` int DEFAULT NULL,
   `score` double DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,6 +80,11 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `client_id` varchar(40) DEFAULT NULL,
+  `client_secret` varchar(40) DEFAULT NULL,
+  `refresh_token` varchar(40) DEFAULT NULL,
+  `access_token` varchar(40) DEFAULT 'unset',
+  `code` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -89,7 +95,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'gaborka98','$2y$10$W/l.0qlOPkKh9gIMzbPote3PADewQWARUk7OqeUv9aXGu6Bm2OhcO','gaborka98@freemail.hu'),(5,'tsbalazs','$2y$10$jvLRAs4TY7hfNar5.52DWObsleeLC0oHckP9wxD1AifW54L3wnJ5i','tsbalazs@freemail.hu'),(6,'asd','$2y$10$w3t4OAVEzSPRlzoaUS28dupeoUvZeeoccKwESiKDobSIp1fyusGUa','asd@asd.com');
+INSERT INTO `users` VALUES (4,'gaborka98','$2y$10$W/l.0qlOPkKh9gIMzbPote3PADewQWARUk7OqeUv9aXGu6Bm2OhcO','gaborka98@freemail.hu','54449','c02f286883b2b7f4c8574ec4e8a714e79863da52','3e4de06eb1725c34ed79d6dc95bc07bc2a4beb40','beb614e72bc0fc47217f68c878f1d12f79f60451','setted'),(5,'tsbalazs','$2y$10$jvLRAs4TY7hfNar5.52DWObsleeLC0oHckP9wxD1AifW54L3wnJ5i','tsbalazs@freemail.hu',NULL,NULL,NULL,'unset',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-03 15:42:55
+-- Dump completed on 2020-11-17 20:11:07
