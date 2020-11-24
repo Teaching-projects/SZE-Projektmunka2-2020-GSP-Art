@@ -17,3 +17,14 @@ jobs:
         user: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
         localDir: "loginpage"
+        remoteDir: "html"
+    - name: Set_permissions
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          chown -R pi:www-data /home/pi/html
+          find /home/pi/html/ -type f -exec chmod 664 {} +
+          find /home/pi/html/ -type d -exec chmod 775 {} +
+          chmod +x /home/pi/html/*.py
+        host: ${{ secrets.FTP_SERVER }}
+        pass: ${{ secrets.SSH_PASS}}

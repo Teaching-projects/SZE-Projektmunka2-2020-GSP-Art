@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty(trim($_POST["username"]))) {
             $username_err = "Add meg a felhasznaloneved";
         } else {
-            $sql = "SELECT id FROM Users WHERE username = ?";
+            $sql = "SELECT id FROM users WHERE username = ?";
 
             if ($stmt = mysqli_prepare($link, $sql)) {
                 mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_stmt_bind_param($stmt, "sssi", $code, $Cid, $secret, $_SESSION["id"]);
 
             if (mysqli_stmt_execute($stmt)) {
-                echo shell_exec("python setTokens.py " . $_SESSION["id"] . " 2>&1");
+                echo shell_exec("python3 setTokens.py " . $_SESSION["id"] . " 2>&1");
                 header("location: /draw.php");
             } else {
                 echo '<script language="javascript">';

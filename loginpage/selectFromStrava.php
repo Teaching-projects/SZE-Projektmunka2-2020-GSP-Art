@@ -29,6 +29,6 @@ $file = $username . "-" . uniqid();
 $success = file_put_contents(EDITED . "tmp/" . $file . ".png", $data);
 $successOrig = file_put_contents(ORIGINAL . "tmp/" . $file . ".png", $dataOrig);
 
-echo shell_exec("python StravaApi.py " . $id . " 2>&1");
+echo shell_exec("python3 StravaApi.py " . $id . " 2>&1");
 mysqli_close($link);
 header("Location: /gpxSelector.php");

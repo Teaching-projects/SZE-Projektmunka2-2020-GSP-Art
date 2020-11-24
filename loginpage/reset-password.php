@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
         
     if(empty($new_password_err) && empty($confirm_password_err)){
-        $sql = "UPDATE Users SET password = ? WHERE email = ?";
+        $sql = "UPDATE users SET password = ? WHERE email = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_email);

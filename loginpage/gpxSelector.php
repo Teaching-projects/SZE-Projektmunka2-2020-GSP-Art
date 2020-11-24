@@ -69,7 +69,7 @@ if (array_key_exists('selectBTN', $_POST)) {
     if ($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_bind_param($stmt, "isd", $userID, $filename, $score);
         if (mysqli_stmt_execute($stmt)) {
-            echo shell_exec("python clearTmps.py " . $filename . " 2>&1");
+            echo shell_exec("python3 clearTmps.py " . $filename . " 2>&1");
             header("Location: /profileDraw.php");
         } else {
             echo '<script language="javascript">';

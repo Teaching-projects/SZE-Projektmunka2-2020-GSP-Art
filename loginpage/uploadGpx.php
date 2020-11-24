@@ -39,7 +39,7 @@ if (count($_FILES['gpxFile']['name']) == 1) {
     if ($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_bind_param($stmt, "is", $id, $file);
         if (mysqli_stmt_execute($stmt)) {
-            echo shell_exec("python gpxToPng.py " . $username . " 2>&1");
+            echo shell_exec("python3 gpxToPng.py " . $username . " 2>&1");
 
             $sql = "SELECT score FROM tmp_gpx WHERE name = '" . $file . "'";
             $result = mysqli_query($link, $sql);
@@ -53,7 +53,7 @@ if (count($_FILES['gpxFile']['name']) == 1) {
             if ($stmt = mysqli_prepare($link, $sql)){
                 mysqli_stmt_bind_param($stmt, "isd", $id, $file, $score);
                 if (mysqli_stmt_execute($stmt)) {
-                    echo shell_exec("python clearTmps.py " . $file . " 2>&1");
+                    echo shell_exec("python3 clearTmps.py " . $file . " 2>&1");
 
                     header("Location: /profileDraw.php");
                 } else {
@@ -87,7 +87,7 @@ if (count($_FILES['gpxFile']['name']) == 1) {
         if ($stmt = mysqli_prepare($link, $sql)){
             mysqli_stmt_bind_param($stmt, "is", $id, $file);
             if (mysqli_stmt_execute($stmt)) {
-                echo shell_exec("python gpxToPng.py " . $username . " 2>&1");
+                echo shell_exec("python3 gpxToPng.py " . $username . " 2>&1");
 
                 header("Location: /gpxSelector.php");
             } else {

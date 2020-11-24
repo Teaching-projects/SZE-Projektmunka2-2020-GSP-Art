@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $file = $username . "-" . uniqid();
         $success = file_put_contents("images/edit/tmp/" . $file . ".png", $data);
 
-        $result = shell_exec("python getRoute.py " . $file . ".png 2>&1");
+        $result = shell_exec("python3 getRoute.py " . $file . ".png 2>&1");
         $tomb = explode("//", $result);
         $long = explode(",", substr($tomb[0], 1,-1));
         $lat = explode(",", substr($tomb[1], 1,-1));

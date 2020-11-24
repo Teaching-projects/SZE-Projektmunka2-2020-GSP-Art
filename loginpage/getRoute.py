@@ -1,8 +1,10 @@
+import os, sys
+os.environ['MPLCONFIGDIR'] = "/tmp/matplotlibcache"
 import osmnx as ox
 import networkx as nx
 import numpy as np
 import cv2
-import os, sys
+
 
 G = ox.graph_from_point(center_point=(47.68835, 17.63674), dist=1000, network_type='walk')
 CYCLES = nx.cycle_basis(nx.Graph(G))
@@ -113,6 +115,8 @@ def node_list_to_path(g, node_list):
 
 def main():
     filename = sys.argv[1]
+    if not os.path.exists("mapIMGs"):
+  	    os.mkdir("mapIMGs")
     if len(os.listdir("mapIMGs")) == 0:
         generate()
 

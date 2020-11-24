@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $username_err = "Add meg a felhasznaloneved";
     } else{
-        $sql = "SELECT id FROM Users WHERE username = ?";
+        $sql = "SELECT id FROM users WHERE username = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_username);
