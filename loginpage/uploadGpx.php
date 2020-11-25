@@ -34,12 +34,12 @@ if (count($_FILES['gpxFile']['name']) == 1) {
 
     move_uploaded_file($tmp_name, TMP . $file . ".gpx");
 
-    $sql = "INSERT INTO tmp_gpx (user_id, name) VALUES (?, ?)";
+    //$sql = "INSERT INTO tmp_gpx (user_id, name) VALUES (?, ?)";
 
     if ($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_bind_param($stmt, "is", $id, $file);
         if (mysqli_stmt_execute($stmt)) {
-            echo shell_exec("python3 gpxToPng.py " . $username . " 2>&1");
+            echo shell_exec("python3 gpxToPng.py " . $username . " " . $id . " 2>&1");
 
             $sql = "SELECT score FROM tmp_gpx WHERE name = '" . $file . "'";
             $result = mysqli_query($link, $sql);
@@ -81,24 +81,10 @@ if (count($_FILES['gpxFile']['name']) == 1) {
         $tmp_name = $_FILES["gpxFile"]["tmp_name"][$i];
 
         move_uploaded_file($tmp_name, TMP . $file . ".gpx");
-
-        $sql = "INSERT INTO tmp_gpx (user_id, name) VALUES (?, ?)";
-
-        if ($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "is", $id, $file);
-            if (mysqli_stmt_execute($stmt)) {
-                echo shell_exec("python3 gpxToPng.py " . $username . " 2>&1");
-
-                header("Location: /gpxSelector.php");
-            } else {
-                echo '<script language="javascript">';
-                echo 'alert("Valami hiba történt, kérlek próbáld meg később!")';
-                echo '</script>';
-                exit;
-            }
-            mysqli_stmt_close($stmt);
-        }
     }
+    echo shell_exec("python3 gpxToPng.py " . $username . " " . $id . " 2>&1");
+
+    header("Location: /gpxSelector.php");
 }
 
 mysqli_close($link);

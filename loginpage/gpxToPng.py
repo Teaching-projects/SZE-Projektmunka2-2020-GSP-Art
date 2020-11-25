@@ -47,7 +47,7 @@ def save_filled(filename, x, y):
     plt.savefig(filename)
 
 
-def mysqlUpload(filename, score):
+def mysqlUpload(filename, score, user_id):
     mydb = mysql.connector.connect(
         host="localhost",
         user="projekt",
@@ -57,8 +57,8 @@ def mysqlUpload(filename, score):
 
     cursor = mydb.cursor()
 
-    sql = "UPDATE tmp_gpx SET score = %s WHERE name = %s"
-    val = (score, filename)
+    sql = "INSERT INTO tmp_gpx (user_id, name, score) VALUES (%s,%s,%s)"
+    val = (user_id, filename, score)
 
     cursor.execute(sql, val)
 
@@ -75,9 +75,9 @@ def calculateScore(filename1, filename2):
     return 100 - (raw * 100)
 
 
-def main1(username):
+def main1(username, user_id):
     # get gpx/tmp tree because all gpx file need to png
-    for file in os.listdir(f"./gpx/tmp"):
+    for file in os.listdir("./gpx/tmp"):
         if username in file:
             filename = file[:-4]
             x, y = get_coordinates("gpx/tmp/" + filename + ".gpx")
@@ -88,13 +88,13 @@ def main1(username):
 
     #filenameOfDrawing = "images/edit/tmp/" + os.listdir(f"./images/edit/tmp")[0]
 
-    for file in os.listdir(f"./images/filled/tmp"):
+    for file in os.listdir("./images/filled/tmp"):
         if username in file:
             score = calculateScore('images/edit/tmp/' + file, "images/filled/tmp/" + file)
 
-            mysqlUpload(file[:-4], round(score,3))
+            mysqlUpload(file[:-4], round(score,3), user_id)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2:
-        main1(sys.argv[1])
+    if len(sys.argv) == 3:
+        main1(sys.argv[1], sys.argv[2])

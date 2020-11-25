@@ -70,7 +70,7 @@ if ($result->num_rows === 0) {
 
         echo "<td class='text-center'><img src='images/routes/" . $row['name'] . ".png" . "' width='150'></td>";
         echo "<td class='text-center' style='font-size: 40px; padding-top: 52px'>" . $row['score'] . "</td>";
-        echo "<td class='text-center'><form method='post'><input class='btn btn-danger' type='submit' id='" . $row['name'] . "' name='deleteBTN' value='Törlés' onclick='deleteSelected(this.id)' style='margin-top: 61px'></form></td>";
+        echo "<td class='text-center'><form method='post'><input class='btn btn-danger' type='submit' id='" . $row['name'] . "' name='deleteBTN' value='Törlés' onclick='deleteSelected(this.id)' style='margin-top: 41px'></form></td>";
         echo "</tr>";
     }
 
