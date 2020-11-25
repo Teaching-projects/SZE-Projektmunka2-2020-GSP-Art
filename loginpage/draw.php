@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input id="imgOrig" name="imgOrig" type="hidden">
         <input id="imgEdit" name="imgEdit" type="hidden">
         <label for="fileupload" class="btn btn-primary" style="margin: 10px 0;">
-            Select files
+            Fájl tallózása
             <input id="fileupload" name="gpxFile[]" type="file" style="display: none;" multiple>
         </label>
         <br><span id="fileuploadtext"></span>
