@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['Back'])) {
         $userLocal = $_POST['userNameToPhp'];
-        echo shell_exec("python clearTmps.py " . $userLocal . " onlyUserName 2>&1");
+        echo shell_exec("python3 clearTmps.py " . $userLocal . " onlyUserName 2>&1");
         header("Location: draw.php");
     }
 }

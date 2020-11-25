@@ -23,7 +23,7 @@ def clearEveryThing(username):
 
                 cursor = mydb.cursor()
 
-                sql = "DELETE FROM tmp_gpx WHERE name LIKE '%" + username + "%'"
+                sql = "DELETE FROM tmp_gpx WHERE `name` LIKE '" + username + "%'"
 
                 cursor.execute(sql)
                 mydb.commit()
