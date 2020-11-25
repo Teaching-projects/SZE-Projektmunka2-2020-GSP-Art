@@ -92,7 +92,7 @@ if (count($_FILES['gpxFile']['name']) == 1) {
                 header("Location: /gpxSelector.php");
             } else {
                 echo '<script language="javascript">';
-                echo 'alert("Valami hiba tortent3")';
+                echo 'alert("Valami hiba történt, kérlek próbáld meg később!")';
                 echo '</script>';
                 exit;
             }

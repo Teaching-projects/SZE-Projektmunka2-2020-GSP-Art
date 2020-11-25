@@ -14,7 +14,7 @@ function Point(x, y) {
 
 $("#deleteObj").click(function () {
     var activeObj = canvas.getActiveObject();
-    if (confirm('Biztos törlöd?')) {
+    if (confirm('Biztosan szeretnéd törölni?')) {
         canvas.remove(activeObj);
     }
 
@@ -39,7 +39,7 @@ $("#poly").click(function () {
 
 $("#getRoute").click(function () {
     if (isCanvasBlank(canvas)) {
-        alert("Eloszor rajzolj valamit!");
+        alert("Először rajzolj valamit kérlek!");
     } else {
         var poly = canvas.getObjects()[0];
         poly.set("fill", "white");
@@ -65,7 +65,7 @@ $("#fileupload").change(function () {
 
 $("#fromStrava").click(function () {
     if (isCanvasBlank(canvas)) {
-        alert("Eloszor rajzolnod kell valamit!")
+        alert("Először rajzolj valamit kérlek!")
     } else {
         var dataURLorig = canvas.toDataURL();
 
@@ -95,15 +95,15 @@ $("#upload").click(function () {
     //var file = document.getElementsByName("gpxFile");
     var file = $("input[name='gpxFile[]']")[0];
     if (isCanvasBlank(canvas)) {
-        alert("Eloszor rajzolnod kell valamit!");
+        alert("Először rajzolj valamit kérlek!");
     } else if (file.files.length == 0) {
-        alert("Valassz fajlt a feltolteshez!");
+        alert("Kérlek válaszd ki a fájlt a feltöltéshez!");
     } else {
         var filesGood = true;
         for(var i = 0; i < file.files.length; i++) {
             if (!file.files.item(i).name.endsWith(".gpx")){
                 filesGood = false;
-                alert("You can upload gpx file only!");
+                alert("Csak GPX kiterjesztésű fájl feltöltésére van lehetőség!");
             }
         }
 

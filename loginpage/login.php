@@ -14,13 +14,13 @@ $username_err = $password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     if(empty(trim($_POST["username"]))){
-        $username_err = "Add meg a felhasznalo neved.";
+        $username_err = "Kérlek add meg a felhasználó neved!";
     } else{
         $username = trim($_POST["username"]);
     }
     
     if(empty(trim($_POST["password"]))){
-        $password_err = "Add meg a jelszavad.";
+        $password_err = "Kérlek add meg a jelszavad!";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -48,14 +48,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             header("location: welcome.php");
                         } else{
-                            $password_err = "A jelszo nem egyezik meg.";
+                            $password_err = "Sajnos a jelszavak nem egyeznek meg!";
                         }
                     }
                 } else{
-                    $username_err = "Nem talalhato felhasznalo ilyen nevvel.";
+                    $username_err = "Nem található felhasználó ilyen névvel!";
                 }
             } else{
-                echo "Valami hiba tortent, probald ujra kesobb.";
+                echo "Valami hiba történt, próbáld újra később!";
             }
 
             mysqli_stmt_close($stmt);

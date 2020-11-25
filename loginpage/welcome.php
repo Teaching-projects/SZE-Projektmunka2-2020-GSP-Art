@@ -22,13 +22,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. udvozollek az oldalamon.</h1>
+        <h1>Kedves, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. üdvözöllek az oldalunkon!</h1>
         <p>
-            <a href="draw.php" class="btn btn-primary">Rajzolas</a>
+            <a href="draw.php" class="btn btn-primary">Rajzolás</a>
             <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
-            <a href="profileDraw.php" class="btn btn-primary">Rajzaim</a>
+            <a href="profileDraw.php" class="btn btn-primary">Mentett rajzaim</a>
             <a href="profileSettings.php" class="btn btn-primary">Profil beállítások</a>
-            <a href="logout.php" class="btn btn-danger">Kijelentkezes</a>
+            <a href="logout.php" class="btn btn-danger">Kijelentkezés</a>
         </p>
     </div>
 </body>
