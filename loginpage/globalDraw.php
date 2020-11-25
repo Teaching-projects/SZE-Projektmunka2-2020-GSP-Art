@@ -29,13 +29,13 @@ require_once "config.php";
 </head>
 <body>
 <div class="page-header">
-    <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. udvozollek az oldalamon.</h1>
+    <h1>Kedves, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. üdvözöllek az oldalamunkon!</h1>
     <p>
-        <a href="draw.php" class="btn btn-primary">Rajzolas</a>
+        <a href="draw.php" class="btn btn-primary">Rajzolás</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
-        <a href="profileDraw.php" class="btn btn-primary">Rajzaim</a>
+        <a href="profileDraw.php" class="btn btn-primary">Mentett rajzaim</a>
         <a href="profileSettings.php" class="btn btn-primary">Profil beállítások</a>
-        <a href="logout.php" class="btn btn-danger">Kijelentkezes</a>
+        <a href="logout.php" class="btn btn-danger">Kijelentkezés</a>
     </p>
 </div>
 
@@ -46,7 +46,7 @@ $sql = "SELECT images.name AS 'name', ROUND(SUM(images.score), 3) AS score, user
 $result = mysqli_query($link, $sql);
 
 if ($result->num_rows === 0) {
-    echo "<h3>Meg nem rajzoltal semmit :(</h3>";
+    echo "<h3>Sajnos még nem rajzoltál semmit :(</h3>";
     exit;
 } else {
     echo "<div class='w-50 mx-auto'>";

@@ -77,25 +77,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> udvozollek az oldalamon.</h1>
+        <h1>Kedves , <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> köszöntelek az oldalunkon!</h1>
         <p>
-        <a href="draw.php" class="btn btn-primary">Rajzolas</a>
+        <a href="draw.php" class="btn btn-primary">Rajzolás</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
-        <a href="profileDraw.php" class="btn btn-primary">Rajzaim</a>
+        <a href="profileDraw.php" class="btn btn-primary">Mentett rajzaim</a>
         <a href="profileSettings.php" class="btn btn-primary">Profil beállítások</a>
-        <a href="logout.php" class="btn btn-danger">Kijelentkezes</a>
+        <a href="logout.php" class="btn btn-danger">Kijelentkezés</a>
 
         </p>
     </div>
 
-    <h3>Draw a polygon</h3>
+    <h3>Rajzolj egy sokszöget a "Sokszög rajzolás" menüponttal</h3>
     <div class="fabric-canvas" style="text-align: center">
         <canvas id="canvas" width="500" height="500" style="border: 2px solid black"></canvas>
         <canvas id="blank" width="500" height="500" style="display: none"></canvas>
     </div>
 
-    <button class="btn btn-danger" id="deleteObj" title="Delete Selected">Delete selected</button>
-    <button class="btn btn-primary" id="poly" title="Draw a polygon">Draw a polygon</button>
+    <button class="btn btn-danger" id="deleteObj" title="Delete Selected">Kijelölt törélese</button>
+    <button class="btn btn-primary" id="poly" title="Draw a polygon">Sokszög rajzolása</button>
 
     <form method="post" action="uploadGpx.php" enctype="multipart/form-data" id="form">
         <input name="userName" type="hidden" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
@@ -108,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </label>
         <br><span id="fileuploadtext"></span>
     </form>
-    <button class="btn btn-primary" id="upload" title="Upload gpx" style="display: inline">Upload gpx</button>
-    <button class="btn btn-primary" id="fromStrava" title="Select From Strava" style="display: <?php echo $strava; ?>">Select from Strava</button>
+    <button class="btn btn-primary" id="upload" title="Upload gpx" style="display: inline">GPX fájl feltöltése</button>
+    <button class="btn btn-primary" id="fromStrava" title="Select From Strava" style="display: <?php echo $strava; ?>">Kiválasztás Strava-ból</button>
 
     <form method="post" action="selectFromStrava.php" id="strava">
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']?>">
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="hidden" name="imgEditToMap" id="imgEditToMap">
         <input type="hidden" name="userName" value="<?php echo htmlspecialchars($_SESSION['username'])?>">
     </form>
-    <button name="getRoute" class="btn btn-primary" title="Show on map" id="getRoute">Get route</button>
+    <button name="getRoute" class="btn btn-primary" title="Show on map" id="getRoute">Útvonal keresése a térképen</button>
 
     <div id="tester" style="width: 800px;height: 600px; margin: auto; display: none;"></div>
     <div style="width: 1px; height: 20px"></div>

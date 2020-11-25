@@ -16,25 +16,25 @@ $new_password_err = $confirm_password_err = $email_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(empty(trim($_POST["email"]))) {
-        $email_err = "adj meg email cimet";
+        $email_err = "Kérlek adj meg email címet!";
     } else {
         $email = trim($_POST["email"]);
     }
  
     if(empty(trim($_POST["new_password"]))){
-        $new_password_err = "Add meg az uj jelszavad.";     
+        $new_password_err = "Kérlek add meg az új jelszavad!";     
     } elseif(strlen(trim($_POST["new_password"])) < 6){
-        $new_password_err = "A jelszonak legalabb 6 karakternek kell lennie.";
+        $new_password_err = "A jelszónak minimum 6 karaktert kell tartalmaznia!";
     } else{
         $new_password = trim($_POST["new_password"]);
     }
     
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Erosisd meg a jelszavad.";
+        $confirm_password_err = "Kérlek erősítsd meg a jelszavad!";
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($new_password_err) && ($new_password != $confirm_password)){
-            $confirm_password_err = "A jelszo nem egyezik.";
+            $confirm_password_err = "Sajnos a jelszavak nem egyeznek meg.";
         }
     }
         
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 header("location: login.php");
                 exit();
             } else{
-                echo "Valami hiba tortent, probald ujra kesobb.";
+                echo "Valami hiba történt, kérlek próbáld meg később.";
             }
 
             mysqli_stmt_close($stmt);

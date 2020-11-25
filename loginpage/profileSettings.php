@@ -18,7 +18,7 @@ $username_err = $email_err = $password_err = $confirm_password_err = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['username'])) {
         if (empty(trim($_POST["username"]))) {
-            $username_err = "Add meg a felhasznaloneved";
+            $username_err = "Kérlek add meg a felhasználónevedet!";
         } else {
             $sql = "SELECT id FROM users WHERE username = ?";
 
@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     mysqli_stmt_store_result($stmt);
 
                     if (mysqli_stmt_num_rows($stmt) == 1) {
-                        $username_err = "A felhasznalonev mar foglalt.";
+                        $username_err = "A felhasználónév már foglalt.";
                     } else {
                         $username = trim($_POST["username"]);
                     }
                 } else {
-                    echo "Valami hiba tortent, kerlek probalkozz kesobb.";
+                    echo "Valami hiba történt, kérlek próbálkozz később.";
                 }
                 mysqli_stmt_close($stmt);
             }
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     session_destroy();
                     header("location: login.php");
                 } else {
-                    echo "Something went wrong. Please try again later.";
+                    echo "Valami nem müködik jól. Kérlek próbáld meg később.";
                 }
 
                 mysqli_stmt_close($stmt);
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else if (isset($_POST['email'])) {
         if (empty(trim($_POST["email"]))) {
-            $email_err = "Add meg az email cimed";
+            $email_err = "Kérlek add meg az email címed!";
         } else {
             $email = trim($_POST["email"]);
         }
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '</script>';
                     header("refresh:0.5;url=profileSettings.php");
                 } else {
-                    echo "Something went wrong. Please try again later.";
+                    echo "Valami nem müködik jól. Kérlek próbáld meg később.";
                 }
 
                 mysqli_stmt_close($stmt);
@@ -93,19 +93,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else if (isset($_POST['password']) && isset($_POST['confirm-password'])) {
         if (empty(trim($_POST["password"]))) {
-            $password_err = "Add meg a jelszavad";
+            $password_err = "Kérlek add meg a jelszavadat!";
         } elseif (strlen(trim($_POST["password"])) < 6) {
-            $password_err = "Jelszonak minimum 6 karakternek kell lennie";
+            $password_err = "A jelszónak minimum 6 karakternek kell lennie!";
         } else {
             $password = trim($_POST["password"]);
         }
 
         if (empty(trim($_POST["confirm-password"]))) {
-            $confirm_password_err = "Erosisd meg ajelszavad.";
+            $confirm_password_err = "Kérlek erősítsd meg a jelszavad!";
         } else {
             $confirm_password = trim($_POST["confirm-password"]);
             if (empty($password_err) && ($password != $confirm_password)) {
-                $confirm_password_err = "Jelszo nem egyezik.";
+                $confirm_password_err = "Sajnos a jelszavak nem egyeznek.";
             }
         }
 
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     session_destroy();
                     header("location: login.php");
                 } else {
-                    echo "Something went wrong. Please try again later.";
+                    echo "Valami nem müködik jól. Kérlek próbáld meg később.";
                 }
 
                 mysqli_stmt_close($stmt);
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("location: /draw.php");
             } else {
                 echo '<script language="javascript">';
-                echo 'alert("Strava beallitasa nem sikerult")';
+                echo 'alert("A Strava beállítása nem sikerült.")';
                 echo '</script>';
             }
         }
@@ -174,11 +174,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="page-header">
     <h1><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> Profil bállításai</h1>
     <p>
-        <a href="draw.php" class="btn btn-primary">Rajzolas</a>
+        <a href="draw.php" class="btn btn-primary">Rajzolás</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
-        <a href="profileDraw.php" class="btn btn-primary">Rajzaim</a>
+        <a href="profileDraw.php" class="btn btn-primary">Mentett rajzaim</a>
         <a href="profileSettings.php" class="btn btn-primary">Profil beállítások</a>
-        <a href="logout.php" class="btn btn-danger">Kijelentkezes</a>
+        <a href="logout.php" class="btn btn-danger">Kijelentkezés</a>
     </p>
 </div>
 <div class="wrapper">
