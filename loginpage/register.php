@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <div class="wrapper">
         <h2>Regisztráció</h2>
-        <p>Kérlek tölsd ki ezt a formot a regisztráláshoz.</p>
+        <p>Kérlek töltsd ki ezt az űrlapot a regisztráláshoz.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Felhasználónév</label>
