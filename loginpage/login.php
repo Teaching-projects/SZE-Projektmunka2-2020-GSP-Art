@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             header("location: welcome.php");
                         } else{
-                            $password_err = "Sajnos a jelszavak nem egyeznek meg!";
+                                $password_err = "Hibás felhasználónév, vagy jelszó!";
                         }
                     }
                 } else{
@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Bejelentkezés">
             </div>
-            <p>Nem rendelkezel még fiókkal? <a href="register.php">Regisztrálj itt!</a>.</p>
+            <p>Nem rendelkezel még fiókkal? <a href="register.php">Regisztrálj itt</a>.</p>
             <p>Elfelejtetted a jelszót? <a href="reset-password.php">Jelszó visszaállítás</a>.</p>
         </form>
     </div>    
