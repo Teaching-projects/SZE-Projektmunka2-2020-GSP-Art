@@ -79,27 +79,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Jelszo visszallitas</h2>
-        <p>Tolsd ki az adatokat a jelszo visszallitashoz.</p>
+        <h2>Jelszó Visszaállítása</h2>
+        <p>Kérlek töltsd ki az adatokat a jelszó visszállitashoz.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <label>Email cim</label>
+                <label>Email cím</label>
                 <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
-                <label>Uj jelszo</label>
+                <label>Új jelszó</label>
                 <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
                 <span class="help-block"><?php echo $new_password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Jelszo megerositese</label>
+                <label>Jelszó megerősítése</label>
                 <input type="password" name="confirm_password" class="form-control">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Kuldes">
-                <a class="btn btn-danger" href="welcome.php">Megse</a>
+                <a class="btn btn-danger" href="welcome.php">Mégse</a>
             </div>
         </form>
     </div>    

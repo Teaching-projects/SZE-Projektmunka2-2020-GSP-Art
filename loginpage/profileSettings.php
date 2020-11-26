@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="setuser">Új felhasználónév: </label>
             <input class="form-control" type="text" id="setuser" name="username">
             <span class="help-block"><?php echo $username_err; ?></span>
-            <input class="form-control btn btn-primary" type="submit" value="username váltása" name="setuser">
+            <input class="form-control btn btn-primary" type="submit" value="Felhasználónév megváltoztatása" name="setuser">
         </div>
     </form>
 
@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="setemail">Új e-mail: </label>
             <input class="form-control" type="email" id="setemail" name="email">
             <span class="help-block"><?php echo $email_err; ?></span>
-            <input class="form-control btn btn-primary" type="submit" value="E-mail váltása">
+            <input class="form-control btn btn-primary" type="submit" value="E-mail cím megváltoztatása">
         </div>
     </form>
 
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="confirm-password">Új jelszó mégegyszer: </label>
             <input id="confirm_password" type="password" class="form-control" name="confirm-password">
             <span class="help-block"><?php echo $confirm_password_err; ?></span>
-            <input class="form-control btn btn-primary" type="submit" value="Jelszó váltása">
+            <input class="form-control btn btn-primary" type="submit" value="Jelszó megváltoztatása">
         </div>
     </form>
 
