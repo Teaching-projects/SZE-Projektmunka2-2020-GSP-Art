@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="reset-email">
         <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-            <label for="setemail">Új e-mail: </label>
+            <label for="setemail">Új e-mail cím: </label>
             <input class="form-control" type="email" id="setemail" name="email">
             <span class="help-block"><?php echo $email_err; ?></span>
             <input class="form-control btn btn-primary" type="submit" value="E-mail cím megváltoztatása">
