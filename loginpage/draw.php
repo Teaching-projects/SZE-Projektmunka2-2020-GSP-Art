@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="page-header">
-        <h1>Kedves , <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> köszöntelek az oldalunkon!</h1>
+        <h1>Kedves <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> köszöntelek az oldalunkon!</h1>
         <p>
         <a href="draw.php" class="btn btn-primary">Rajzolás</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input id="imgOrig" name="imgOrig" type="hidden">
         <input id="imgEdit" name="imgEdit" type="hidden">
         <label for="fileupload" class="btn btn-primary" style="margin: 10px 0;">
-            Select files
+            Fájl tallózása
             <input id="fileupload" name="gpxFile[]" type="file" style="display: none;" multiple>
         </label>
         <br><span id="fileuploadtext"></span>
