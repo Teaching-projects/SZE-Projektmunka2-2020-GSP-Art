@@ -29,7 +29,7 @@ require_once "config.php";
 </head>
 <body>
 <div class="page-header">
-    <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. udvozollek az oldalamon.</h1>
+    <h1>Kedves <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> üdvözöllek az oldalunkon.</h1>
     <p>
         <a href="draw.php" class="btn btn-primary">Rajzolás</a>
         <a href="globalDraw.php" class='btn btn-primary'>Toplista</a>
