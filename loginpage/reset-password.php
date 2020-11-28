@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Kuldes">
+                <input type="submit" class="btn btn-primary" value="Küldés">
                 <a class="btn btn-danger" href="welcome.php">Mégse</a>
             </div>
         </form>

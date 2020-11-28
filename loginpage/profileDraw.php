@@ -53,10 +53,10 @@ if ($result->num_rows === 0) {
     echo "<thead>";
     echo "<tr>";
     echo "<th class='text-center' scope='col'>#</th>";
-    echo "<th class='text-center' scope='col'>Image</th>";
+    echo "<th class='text-center' scope='col'>Kép</th>";
     echo "<th class='text-center' scope='col'>GPX</th>";
-    echo "<th class='text-center' scope='col'>Score</th>";
-    echo "<th class='text-center' scope='col'>Delete</th>";
+    echo "<th class='text-center' scope='col'>Pont</th>";
+    echo "<th class='text-center' scope='col'>Törlés</th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
